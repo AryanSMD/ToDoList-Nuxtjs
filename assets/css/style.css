@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* ------------------------- Root ------------------------- */
+
+:root {
+    --lightBg: #F4F6F9;
+    --lightColor: white;
+    --darkBg: #161D31;
+    --darkColor: #292F45;
+    --primary: #10b981;
+    --secondary: #064e3b;
+    --grey: #94a3b8;
+    --paleGrey: #e2e8f0;
+    --text: #3a4045;
+}
+
+* {
+    @apply
+    m-0 p-0 box-border
+}
+
+body {
+    @apply
+    font-sans text-[20px]
+}
+
+::-webkit-scrollbar {
+    @apply
+    w-[10px]
+}
+::-webkit-scrollbar-track {
+    @apply
+    bg-white dark:bg-darkColor rounded-md overflow-hidden
+}
+::-webkit-scrollbar-thumb {
+    @apply
+    bg-grey rounded-md
+}
+
+input {
+    @apply 
+    w-full h-10 md:h-12 p-2 border-[2px] border-paleGrey rounded-md cursor-pointer outline-none
+    focus:border-primary transition-colors duration-300 bg-transparent dark:border-text
+    dark:focus:border-primary bg-white dark:bg-darkColor placeholder:text-text
+    dark:placeholder:text-white
+}
+input {
+    &.input-err {
+        @apply
+        border-red-400
+    }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: var(--grey) !important;
+}
+
+input[type=checkbox] {
+    @apply
+    hidden
+}
+input[type=checkbox]+label {
+    background: url('../svg/square.svg') 0 50% no-repeat;
+    background-size: 40px;
+    @apply
+    flex items-center h-[30px] aspect-square cursor-pointer pl-[40px] transition-all duration-300 w-full
+}
+input[type=checkbox]:checked+label {
+    background: url('../svg/check.svg') 0 50% no-repeat;
+    background-size: 40px;
+}
+
+
+
+
+/* ------------------------- Classes ------------------------- */
+
+.wrraper {
+    @apply
+    w-full min-h-screen bg-lightBg dark:bg-darkBg text-text dark:text-white transition-colors
+    duration-300 fixed top-0 overflow-auto
+}
+
+.wrraper .top {
+    @apply
+    absolute top-0 w-full h-[450px] bg-mountain bg-center
+}
+
+.wrraper .top .layer {
+    @apply
+    w-full h-full bg-gradient-to-r from-violet-600 to-sky-400 opacity-50
+}
+
+.wrraper .container {
+    @apply
+    relative
+}
+
+.wrraper .container .header {
+    @apply
+    w-full h-[200px] bg-transparent z-50 mt-[50px] flex items-center justify-around lg:justify-between text-white
+}
+
+.wrraper .container .header .left {
+    @apply
+    text-[70px] md:text-[100px] font-medium italic cursor-default
+}
+
+.wrraper .container .header .right {
+    @apply
+    h-full w-auto flex items-center
+}
+
+.wrraper .container .header .right .darkMode-btn {
+    @apply
+    w-16 h-16 md:h-24 md:w-24 mt-[25px] md:mt-[32px] flex items-center overflow-hidden relative
+}
+
+.wrraper .container .header .right .darkMode-btn .sun,
+.wrraper .container .header .right .darkMode-btn .moon {
+    @apply
+    h-full w-full transition-all duration-300 absolute
+}
+
+.wrraper .container .header .right .darkMode-btn .sun {
+    @apply
+    left-[-250px]
+}
+
+.wrraper .container .header .right .darkMode-btn .moon {
+    @apply
+    right-[-250px] text-darkColor
+}
+
+.wrraper .container .header .right .darkMode-btn {
+    &.on .moon {
+        @apply
+        translate-x-[-250px]
+    }
+    &.off .sun {
+        @apply
+        translate-x-[250px]
+    }
+}
+
+.wrraper .container .content {
+    @apply
+    w-full h-auto flex flex-col justify-center items-center gap-4
+}
+
+.wrraper .container .content .card {
+    @apply
+    w-[370px] md:w-[600px] h-auto bg-lightColor dark:bg-darkColor p-4 rounded-md shadow-md mb-2 transition-colors duration-300
+    text-text dark:text-white
+}
+
+.wrraper .container .content .card .title {
+    @apply
+    text-[26px] font-medium mb-2 -mt-2
+}
+
+.wrraper .container .content .add .card {
+    @apply
+    flex items-center gap-2
+}
+
+.wrraper .container .content .add .card .btn {
+    @apply
+    h-12 w-12 bg-transparent border-[2px] border-primary text-primary rounded-md hover:bg-primary hover:text-white
+    transition-colors duration-300
+}
+
+.wrraper .container .content .add .card .btn .svg {
+    @apply
+    h-full w-full
+}
+
+.wrraper .container .content .card .list {
+    @apply
+    w-full h-[330px] overflow-auto flex flex-col gap-2 border-[1px] border-paleGrey dark:border-text p-2
+    transition-colors duration-300 text-text dark:text-white rounded-md divide-y divide-paleGrey dark:divide-text
+}
+
+.wrraper .container .content .card .list .item {
+    @apply
+    w-full min-h-14 text-[22px] italic text-text dark:text-white flex items-center justify-between p-1
+    overflow-hidden
+}
+
+.wrraper .container .content .card .list .item .left {
+    @apply
+    w-full text-clip
+}
+.wrraper .container .content .card .list .item .left {
+    &.done {
+        @apply
+        line-through
+    }
+}
+
+.wrraper .container .content .card .list .item .right {
+    @apply
+    flex items-center justify-end gap-3
+}
+
+.wrraper .container .content .card .list .item .right .btn-edit,
+.wrraper .container .content .card .list .item .right .btn-del {
+    @apply
+    h-6 w-6 text-grey transition-colors duration-300
+}
+.wrraper .container .content .card .list .item .right .btn-edit {
+    @apply
+    hover:text-yellow-400
+}
+.wrraper .container .content .card .list .item .right .btn-del {
+    @apply
+    hover:text-red-500
+}
+
+.wrraper .container .content .card .list .item .right .btn .svg {
+    @apply
+    h-full w-full
+}
+
+.wrraper .footer {
+    @apply
+    fixed bottom-0 w-full h-[60px] bg-lightColor dark:bg-darkColor p-2
+}
+
+.wrraper .footer .text {
+    @apply
+    w-full h-full flex justify-center items-center cursor-default text-center italic
+}
