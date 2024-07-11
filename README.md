@@ -1,4 +1,5 @@
-To Do list app with Nuxt and Tailwindcss.
+## Introduction
+To Do list app with Nuxt.js and Tailwindcss.
 
 ## Setup
 
