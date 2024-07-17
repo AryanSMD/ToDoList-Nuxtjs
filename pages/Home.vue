@@ -20,7 +20,7 @@
             <div class="add">
                 <div class="card">
                     <input type="text" placeholder="Add new Task..." v-model="title" :class="showErr ? 'input-err' : null">
-                    <button class="btn" @click="addTask()">
+                    <button class="btn-add" @click="addTask()">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="svg" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                         </svg>
@@ -30,6 +30,10 @@
             <div class="card">
                 <div class="title">List</div>
                 <Tasks />
+                <div class="card-footer">
+                    <button class="btn done" @click="doneAll()">Done All</button>
+                    <button class="btn clear" @click="removeAll()">Clear All</button>
+                </div>
             </div>            
         </div>
     </div>
@@ -49,12 +53,15 @@ const title = ref('');
 const showErr = ref(false);
 
 
-const getDarkMode = computed(()=>{
+const getDarkMode = computed(() => {
     return store.getters['getDarkMode']
+})
+const getTasks = computed(() => {
+    return store.getters['getTasks'];
 })
 
 
-const setDarkMode = ()=>{
+const setDarkMode = () => {
     store.dispatch('setDarkMode')
 }
 const addTask = async () => {
@@ -68,6 +75,17 @@ const addTask = async () => {
         }
         await store.dispatch('addTask', obj);
         title.value = '';
+    }
+}
+const doneAll = () => {
+    for(let i in getTasks.value) {
+        store.dispatch('done', i)
+    }
+}
+const removeAll = () => {
+    const listLength = getTasks.value.length;
+    for(let i=0; i < listLength; i++) {
+        store.dispatch('removeTask', 0)
     }
 }
 </script>

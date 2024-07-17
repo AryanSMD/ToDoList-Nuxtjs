@@ -34,7 +34,7 @@ body {
 }
 ::-webkit-scrollbar-track {
     @apply
-    bg-white dark:bg-darkColor rounded-md overflow-hidden
+    bg-darkBg overflow-hidden
 }
 ::-webkit-scrollbar-thumb {
     @apply
@@ -92,8 +92,8 @@ input[type=checkbox]:checked+label {
 
 .wrraper {
     @apply
-    w-full min-h-screen bg-lightBg dark:bg-darkBg text-text dark:text-white transition-colors
-    duration-300 fixed top-0 overflow-auto
+    w-full min-h-screen h-auto bg-lightBg dark:bg-darkBg text-text dark:text-white transition-colors
+    duration-300 top-0 relative
 }
 
 .wrraper .top {
@@ -108,7 +108,7 @@ input[type=checkbox]:checked+label {
 
 .wrraper .container {
     @apply
-    relative
+    relative overflow-auto
 }
 
 .wrraper .container .header {
@@ -160,7 +160,7 @@ input[type=checkbox]:checked+label {
 
 .wrraper .container .content {
     @apply
-    w-full h-auto flex flex-col justify-center items-center gap-4
+    w-full h-auto flex flex-col justify-center items-center gap-4 mb-[120px]
 }
 
 .wrraper .container .content .card {
@@ -179,20 +179,20 @@ input[type=checkbox]:checked+label {
     flex items-center gap-2
 }
 
-.wrraper .container .content .add .card .btn {
+.wrraper .container .content .add .card .btn-add {
     @apply
     h-12 w-12 bg-transparent border-[2px] border-primary text-primary rounded-md hover:bg-primary hover:text-white
     transition-colors duration-300
 }
 
-.wrraper .container .content .add .card .btn .svg {
+.wrraper .container .content .add .card .btn-add .svg {
     @apply
     h-full w-full
 }
 
 .wrraper .container .content .card .list {
     @apply
-    w-full h-[330px] overflow-auto flex flex-col gap-2 border-[1px] border-paleGrey dark:border-text p-2
+    w-full h-[300px] overflow-auto flex flex-col gap-2 border-[1px] border-paleGrey dark:border-text p-2
     transition-colors duration-300 text-text dark:text-white rounded-md divide-y divide-paleGrey dark:divide-text
 }
 
@@ -218,23 +218,35 @@ input[type=checkbox]:checked+label {
     flex items-center justify-end gap-3
 }
 
-.wrraper .container .content .card .list .item .right .btn-edit,
 .wrraper .container .content .card .list .item .right .btn-del {
     @apply
     h-6 w-6 text-grey transition-colors duration-300
 }
-.wrraper .container .content .card .list .item .right .btn-edit {
-    @apply
-    hover:text-yellow-400
-}
+
 .wrraper .container .content .card .list .item .right .btn-del {
     @apply
     hover:text-red-500
 }
 
-.wrraper .container .content .card .list .item .right .btn .svg {
+.wrraper .container .content .card .card-footer {
     @apply
-    h-full w-full
+    w-full h-auto flex justify-center items-center gap-6 md:p-4 mt-3 md:mt-2
+}
+
+.wrraper .container .content .card .card-footer .btn {
+    @apply
+    h-[40px] md:w-[140px] md:h-[45px] p-4 flex justify-center items-center rounded-md font-medium
+    border-[1px] transition-colors duration-300
+}
+.wrraper .container .content .card .card-footer .btn {
+    &.done {
+        @apply
+        border-primary text-primary hover:bg-primary hover:text-white
+    }
+    &.clear {
+        @apply
+        border-red-500 text-red-500 hover:bg-red-500 hover:text-white
+    }
 }
 
 .wrraper .footer {
