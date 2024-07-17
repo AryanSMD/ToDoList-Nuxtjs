@@ -34,7 +34,7 @@ body {
 }
 ::-webkit-scrollbar-track {
     @apply
-    bg-darkBg overflow-hidden
+    bg-white dark:bg-darkColor overflow-hidden
 }
 ::-webkit-scrollbar-thumb {
     @apply
