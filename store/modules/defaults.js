@@ -1,24 +1,16 @@
+import Tasks from "~/components/Tasks.vue";
+
 export default {
     state: {
         darkMode: false,
-        tasks: [
-            {
-                title: 'Go to the office',
-                isDone: false,
-            },
-            {
-                title: 'Read Book',
-                isDone: false,
-            },
-            {
-                title: 'Exercise',
-                isDone: false,
-            },
-        ]
+        tasks: []
     },
     actions: {
         async defaultDarkMode({ commit }) {
             await commit('defaultDarkMode');
+        },
+        async defaultTasks({ commit }) {
+            await commit('defaultTasks');
         },
         async setDarkMode({ commit }) {
             await commit('setDarkMode');
@@ -39,18 +31,26 @@ export default {
             typeof isDarkMode === 'string' ?
                 state.darkMode = (localStorage?.getItem('darkMode') === 'true') : null;
         },
+        defaultTasks(state) {
+            const tasks = localStorage.getItem('tasks');
+            tasks !== null ?
+                state.tasks = JSON.parse(localStorage?.getItem('tasks')) : null;
+        },
         setDarkMode(state) {
             state.darkMode = !state.darkMode;
             localStorage.setItem('darkMode', state.darkMode);
         },
         done(state, index) {
             state.tasks[index].isDone = !state.tasks[index].isDone;
+            localStorage.setItem('tasks', JSON.stringify(state.tasks));
         },
         addTask(state, val) {
             state.tasks.push(val);
+            localStorage.setItem('tasks', JSON.stringify(state.tasks));
         },
         removeTask(state, index) {
             state.tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(state.tasks));
         },
     },
     getters: {

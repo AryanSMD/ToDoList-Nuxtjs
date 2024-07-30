@@ -19,7 +19,8 @@
         <div class="content">
             <div class="add">
                 <div class="card">
-                    <input type="text" placeholder="Add new Task..." v-model="title" :class="showErr ? 'input-err' : null">
+                    <input type="text" placeholder="Add new Task..." v-model="title" 
+                        :class="showErr ? 'input-err' : null"  @keyup.enter="addTask()">
                     <button class="btn-add" @click="addTask()">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="svg" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -65,12 +66,12 @@ const setDarkMode = () => {
     store.dispatch('setDarkMode')
 }
 const addTask = async () => {
-    if (title.value === '' || title.value.length >= 30) {
+    if (title.value.trim() === '' || title.value.length >= 30) {
         showErr.value = true;
     } else {
         showErr.value = false;
         const obj = {
-            title: title.value,
+            title: title.value.trim(),
             isDone: false,
         }
         await store.dispatch('addTask', obj);

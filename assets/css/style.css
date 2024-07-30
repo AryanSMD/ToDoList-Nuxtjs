@@ -43,7 +43,7 @@ body {
 
 input {
     @apply 
-    w-full h-10 md:h-12 p-2 border-[2px] border-paleGrey rounded-md cursor-pointer outline-none
+    w-full h-12 p-2 border-[2px] border-paleGrey rounded-md cursor-pointer outline-none
     focus:border-primary transition-colors duration-300 bg-transparent dark:border-text
     dark:focus:border-primary bg-white dark:bg-darkColor placeholder:text-text
     dark:placeholder:text-white
@@ -113,7 +113,8 @@ input[type=checkbox]:checked+label {
 
 .wrraper .container .header {
     @apply
-    w-full h-[200px] bg-transparent z-50 mt-[50px] flex items-center justify-around lg:justify-between text-white
+    w-full h-[200px] bg-transparent z-50 mt-[50px] flex items-center justify-around lg:justify-between
+    text-white
 }
 
 .wrraper .container .header .left {
@@ -165,8 +166,8 @@ input[type=checkbox]:checked+label {
 
 .wrraper .container .content .card {
     @apply
-    w-[370px] md:w-[600px] h-auto bg-lightColor dark:bg-darkColor p-4 rounded-md shadow-md mb-2 transition-colors duration-300
-    text-text dark:text-white
+    w-[300px] min-[400px]:w-[370px] md:w-[600px] h-auto bg-lightColor dark:bg-darkColor p-4 rounded-md
+    shadow-md mb-2 transition-colors duration-300 text-text dark:text-white
 }
 
 .wrraper .container .content .card .title {
@@ -204,12 +205,12 @@ input[type=checkbox]:checked+label {
 
 .wrraper .container .content .card .list .item .left {
     @apply
-    w-full text-clip
+    w-full text-clip translate-x-[-30px] transition-transform duration-300
 }
 .wrraper .container .content .card .list .item .left {
     &.done {
         @apply
-        line-through
+        line-through translate-x-0
     }
 }
 
@@ -251,7 +252,7 @@ input[type=checkbox]:checked+label {
 
 .wrraper .footer {
     @apply
-    fixed bottom-0 w-full h-[60px] bg-lightColor dark:bg-darkColor p-2
+    absolute bottom-0 w-full h-[60px] bg-lightColor dark:bg-darkColor p-2
 }
 
 .wrraper .footer .text {

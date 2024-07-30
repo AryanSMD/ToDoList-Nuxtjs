@@ -21,7 +21,8 @@ const getDarkMode = computed(()=>{
 
 
 onMounted(() => {
-  store.dispatch('defaultDarkMode'); 
+  store.dispatch('defaultDarkMode');
+  store.dispatch('defaultTasks');
 })
 </script>
 
