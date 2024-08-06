@@ -1,5 +1,5 @@
 <template>
-  <div :class="getDarkMode ? 'dark' : null">
+  <div :class="defaults.getDarkMode ? 'dark' : null">
     <div class="wrraper">
       <NuxtPage />
     </div>
@@ -8,21 +8,16 @@
 
 
 <script setup>
-import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex'
+import { onMounted } from 'vue';
+import { useDefaults } from './store/defaults';
 
 
-const store = useStore();
-
-
-const getDarkMode = computed(()=>{
-    return store.getters['getDarkMode']
-})
+const defaults = useDefaults();
 
 
 onMounted(() => {
-  store.dispatch('defaultDarkMode');
-  store.dispatch('defaultTasks');
+  defaults.defaultDarkMode();
+  defaults.defaultTasks();
 })
 </script>
 

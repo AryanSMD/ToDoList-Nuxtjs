@@ -6,9 +6,12 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'To Do List'
+      title: 'To Do List',
     }
   },
+  modules: [
+    '@pinia/nuxt',
+  ],
   css: ['assets/css/style.css'],
   postcss: {
     plugins: {

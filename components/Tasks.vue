@@ -1,8 +1,8 @@
 <template>
     <div class="list">
-        <div class="item" v-for="(item, index) in getTasks">
-            <div class="left" :class="getTasks[index].isDone ? 'done' : null">
-                <input type="checkbox" :id="index" :checked="getTasks[index].isDone" @click="done(index)">
+        <div class="item" v-for="(item, index) in defaults.getTasks">
+            <div class="left" :class="defaults.getTasks[index].isDone ? 'done' : null">
+                <input type="checkbox" :id="index" :checked="defaults.getTasks[index].isDone" @click="done(index)">
                 <label :for="index">{{ item.title }}</label>
             </div>
             <div class="right">
@@ -18,24 +18,17 @@
 
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex'
+import { useDefaults } from '~/store/defaults';
 
 
-const store = useStore();
+const defaults = useDefaults();
 
 
-const getTasks = computed(() => {
-    return store.getters['getTasks'];
-})
-
-
-const done = (index) => {
-    store.dispatch('done', index)
+function done(index) {
+    defaults.done(index);
 }
-
-const removeTask = (index) => {
-    store.dispatch('removeTask', index)
+function removeTask(index) {
+    defaults.removeTask(index);
 }
 </script>
 

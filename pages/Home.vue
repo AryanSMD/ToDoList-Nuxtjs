@@ -6,7 +6,7 @@
         <div class="header">
             <div class="left">To Do</div>
             <div class="right">
-                <button class="darkMode-btn" @click="setDarkMode()" :class="getDarkMode ? 'on' : 'off'">
+                <button class="darkMode-btn" @click="setDarkMode()" :class="defaults.getDarkMode ? 'on' : 'off'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="sun" viewBox="0 0 16 16">
                         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
                     </svg>
@@ -45,27 +45,19 @@
 
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useStore } from 'vuex'
+import { ref } from 'vue';
+import { useDefaults } from '~/store/defaults';
 
 
-const store = useStore();
+const defaults = useDefaults();
 const title = ref('');
 const showErr = ref(false);
 
 
-const getDarkMode = computed(() => {
-    return store.getters['getDarkMode']
-})
-const getTasks = computed(() => {
-    return store.getters['getTasks'];
-})
-
-
-const setDarkMode = () => {
-    store.dispatch('setDarkMode')
+function setDarkMode() {
+    defaults.setDarkMode()
 }
-const addTask = async () => {
+function addTask() {
     if (title.value.trim() === '' || title.value.length >= 30) {
         showErr.value = true;
     } else {
@@ -74,19 +66,19 @@ const addTask = async () => {
             title: title.value.trim(),
             isDone: false,
         }
-        await store.dispatch('addTask', obj);
+        defaults.addTask(obj);
         title.value = '';
     }
 }
-const doneAll = () => {
-    for(let i in getTasks.value) {
-        store.dispatch('done', i)
+function doneAll() {
+    for(let i in defaults.getTasks) {
+        defaults.done(i)
     }
 }
-const removeAll = () => {
-    const listLength = getTasks.value.length;
+function removeAll() {
+    const listLength = defaults.getTasks.length;
     for(let i=0; i < listLength; i++) {
-        store.dispatch('removeTask', 0)
+        defaults.removeTask(0)
     }
 }
 </script>
