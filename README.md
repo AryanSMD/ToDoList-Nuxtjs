@@ -1,5 +1,5 @@
 ## Introduction
-To Do list app with **Nuxt3**, **Pinia**, **TypeScript** and **Tailwindcss**.
+To Do list app with ***Nuxt3***, ***Pinia***, ***TypeScript*** and ***Tailwindcss***.
 
 ## Setup
 
