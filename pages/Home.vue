@@ -44,14 +44,14 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import { useDefaults } from '~/store/defaults';
 
 
 const defaults = useDefaults();
-const title = ref('');
-const showErr = ref(false);
+const title = ref<string>('');
+const showErr = ref<boolean>(false);
 
 
 function setDarkMode() {
@@ -62,7 +62,7 @@ function addTask() {
         showErr.value = true;
     } else {
         showErr.value = false;
-        const obj = {
+        const obj: Task = {
             title: title.value.trim(),
             isDone: false,
         }
@@ -71,14 +71,26 @@ function addTask() {
     }
 }
 function doneAll() {
+    const firstVal: boolean = defaults.getTasks[0].isDone;
+    let flag: boolean = false;
     for(let i in defaults.getTasks) {
-        defaults.done(i)
+        defaults.getTasks[i].isDone !== firstVal && (flag = true);
+    }
+    if (flag) {
+        helperLoop(true);
+    } else {
+        helperLoop(!defaults.getTasks[0].isDone);
     }
 }
 function removeAll() {
-    const listLength = defaults.getTasks.length;
+    const listLength: number = defaults.getTasks.length;
     for(let i=0; i < listLength; i++) {
         defaults.removeTask(0)
+    }
+}
+function helperLoop(val: boolean) {
+    for(let i in defaults.getTasks) {
+        defaults.tasks[i].isDone = val;
     }
 }
 </script>

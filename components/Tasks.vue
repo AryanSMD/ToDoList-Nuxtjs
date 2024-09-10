@@ -2,8 +2,8 @@
     <div class="list">
         <div class="item" v-for="(item, index) in defaults.getTasks">
             <div class="left" :class="defaults.getTasks[index].isDone ? 'done' : null">
-                <input type="checkbox" :id="index" :checked="defaults.getTasks[index].isDone" @click="done(index)">
-                <label :for="index">{{ item.title }}</label>
+                <input type="checkbox" :id="index.toString()" :checked="defaults.getTasks[index].isDone" @click="done(index)">
+                <label :for="index.toString()">{{ item.title }}</label>
             </div>
             <div class="right">
                 <button class="btn-del" @click="removeTask(index)">
@@ -17,17 +17,17 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
 import { useDefaults } from '~/store/defaults';
 
 
 const defaults = useDefaults();
 
 
-function done(index) {
+function done(index: number) {
     defaults.done(index);
 }
-function removeTask(index) {
+function removeTask(index: number) {
     defaults.removeTask(index);
 }
 </script>
